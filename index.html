@@ -159,7 +159,20 @@
             overflow: hidden;
             width: 100%;
             height: 100%;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, box-shadow 0.4s ease;
+            border-radius: 4px;
+        }
+
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .img-placeholder:hover img {
+            transform: scale(1.06);
         }
 
         .dark-bg .img-placeholder, .sepia-bg .img-placeholder {
@@ -611,7 +624,9 @@
     <section id="bio" class="sepia-bg" data-index="1">
         <div class="bio-container">
             <div class="bio-photo">
-                <div class="img-placeholder" data-category="portrait-artiste"><span>Portrait de l'artiste</span></div>
+                <div class="img-placeholder" data-category="portrait-artiste">
+                    <img src="images/ibra_portrait_header.jpg" alt="Ibraimhojo Bakirov - Portrait de l'artiste" loading="lazy">
+                </div>
             </div>
             <div class="bio-text">
                 <h2 class="section-title">Biographie</h2>
@@ -659,12 +674,41 @@
         <h3 class="section-subtitle text-center">Атмосфера Мастерской</h3>
         
         <div class="workshop-grid">
-            <div class="workshop-item"><div class="img-placeholder" data-category="workshop"><span>Atelier 1</span></div></div>
-            <div class="workshop-item"><div class="img-placeholder" data-category="workshop"><span>Atelier 2</span></div></div>
-            <div class="workshop-item"><div class="img-placeholder" data-category="workshop"><span>Atelier 3</span></div></div>
-            <div class="workshop-item"><div class="img-placeholder" data-category="workshop"><span>Atelier 4</span></div></div>
-            <div class="workshop-item"><div class="img-placeholder" data-category="workshop"><span>Atelier 5</span></div></div>
-            <div class="workshop-item"><div class="img-placeholder" data-category="workshop"><span>Atelier 6</span></div></div>
+            <div class="workshop-item">
+                <div class="img-placeholder" data-category="workshop">
+                    <img src="images/workshop/IMG-20261006-WA0033(1).jpg" alt="Atelier Ibraimhojo Bakirov 1" loading="lazy">
+                </div>
+            </div>
+            <div class="workshop-item">
+                <div class="img-placeholder" data-category="workshop">
+                    <img src="images/workshop/IMG-20261006-WA0034(1).jpg" alt="Atelier Ibraimhojo Bakirov 2" loading="lazy">
+                </div>
+            </div>
+            <div class="workshop-item">
+                <div class="img-placeholder" data-category="workshop">
+                    <img src="images/workshop/IMG-20261006-WA0035(1).jpg" alt="Atelier Ibraimhojo Bakirov 3" loading="lazy">
+                </div>
+            </div>
+            <div class="workshop-item">
+                <div class="img-placeholder" data-category="workshop">
+                    <img src="images/workshop/IMG-20261006-WA0036(1).jpg" alt="Atelier Ibraimhojo Bakirov 4" loading="lazy">
+                </div>
+            </div>
+            <div class="workshop-item">
+                <div class="img-placeholder" data-category="workshop">
+                    <img src="images/workshop/IMG-20261006-WA0037(1).jpg" alt="Atelier Ibraimhojo Bakirov 5" loading="lazy">
+                </div>
+            </div>
+            <div class="workshop-item">
+                <div class="img-placeholder" data-category="workshop">
+                    <img src="images/workshop/IMG-20261006-WA0038(1).jpg" alt="Atelier Ibraimhojo Bakirov 6" loading="lazy">
+                </div>
+            </div>
+            <div class="workshop-item">
+                <div class="img-placeholder" data-category="workshop">
+                    <img src="images/workshop/IMG-20261006-WA0039(1).jpg" alt="Atelier Ibraimhojo Bakirov 7" loading="lazy">
+                </div>
+            </div>
         </div>
     </section>
 
@@ -674,12 +718,96 @@
         <h3 class="section-subtitle">Портреты</h3>
         
         <div class="gallery-grid">
-            <div class="gallery-item"><div class="img-placeholder" data-category="portrait"><span>Portrait 1</span></div></div>
-            <div class="gallery-item"><div class="img-placeholder" data-category="portrait"><span>Portrait 2</span></div></div>
-            <div class="gallery-item"><div class="img-placeholder" data-category="portrait"><span>Portrait 3</span></div></div>
-            <div class="gallery-item"><div class="img-placeholder" data-category="portrait"><span>Portrait 4</span></div></div>
-            <div class="gallery-item"><div class="img-placeholder" data-category="portrait"><span>Portrait 5</span></div></div>
-            <div class="gallery-item"><div class="img-placeholder" data-category="portrait"><span>Portrait 6</span></div></div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261003-WA0032(1).jpg" alt="Portrait par Ibraimhojo Bakirov 1" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261003-WA0043(1).jpg" alt="Portrait par Ibraimhojo Bakirov 2" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261003-WA0044(1).jpg" alt="Portrait par Ibraimhojo Bakirov 3" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261003-WA0046(1).jpg" alt="Portrait par Ibraimhojo Bakirov 4" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0016.jpg" alt="Portrait par Ibraimhojo Bakirov 5" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0018.jpg" alt="Portrait par Ibraimhojo Bakirov 6" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0020.jpg" alt="Portrait par Ibraimhojo Bakirov 7" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0022.jpg" alt="Portrait par Ibraimhojo Bakirov 8" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0023.jpg" alt="Portrait par Ibraimhojo Bakirov 9" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0024.jpg" alt="Portrait par Ibraimhojo Bakirov 10" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0025.jpg" alt="Portrait par Ibraimhojo Bakirov 11" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0026.jpg" alt="Portrait par Ibraimhojo Bakirov 12" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0027.jpg" alt="Portrait par Ibraimhojo Bakirov 13" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0028.jpg" alt="Portrait par Ibraimhojo Bakirov 14" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0029.jpg" alt="Portrait par Ibraimhojo Bakirov 15" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0030.jpg" alt="Portrait par Ibraimhojo Bakirov 16" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0031.jpg" alt="Portrait par Ibraimhojo Bakirov 17" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="img-placeholder" data-category="portrait">
+                    <img src="images/portraits/IMG-20261006-WA0032.jpg" alt="Portrait par Ibraimhojo Bakirov 18" loading="lazy">
+                </div>
+            </div>
         </div>
         
         <div class="quote">
