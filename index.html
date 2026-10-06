@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ibraimhojo Bakirov | Portfolio</title>
+    <title>Ibraimhojo Bakirov | Artiste plasticien, sculpteur et photographe</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,16 +15,18 @@
     <style>
         :root {
             /* Color Palette */
-            --c-dark: #1A1A1A;
-            --c-brown: #2C1810;
-            --c-light: #F5F0EB;
-            --c-gold: #C4A265;
-            --c-sepia: #704214;
-            --c-charcoal: #222222;
+            --c-dark: #121110;
+            --c-brown: #241611;
+            --c-light: #F6F2EC;
+            --c-gold: #C8A265;
+            --c-gold-hover: #dfbc82;
+            --c-sepia: #664126;
+            --c-card-bg: rgba(255, 255, 255, 0.04);
+            --c-card-border: rgba(200, 162, 101, 0.2);
             
             /* Typography */
-            --f-heading: 'Playfair Display', serif;
-            --f-body: 'Inter', sans-serif;
+            --f-heading: 'Playfair Display', Georgia, serif;
+            --f-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         * {
@@ -33,44 +35,171 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--f-body);
             background-color: var(--c-light);
             color: var(--c-dark);
             overflow-x: hidden;
-            cursor: none; /* Custom cursor */
-            line-height: 1.6;
+            line-height: 1.65;
+            font-size: 16px;
+            cursor: default;
         }
 
-        a, button {
+        /* Show custom cursor only on hover-capable pointer devices */
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none;
+            }
+            a, button, .clickable-img, .lang-btn, .nav-link, .lightbox-close, .lightbox-prev, .lightbox-next {
+                cursor: none !important;
+            }
+        }
+
+        a {
             color: inherit;
             text-decoration: none;
-            cursor: none;
+            transition: color 0.25s ease;
         }
 
-        /* Typography Styles */
+        /* Typography */
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--f-heading);
             font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+            text-align: center;
+        }
+
+        .section-header.text-left {
+            text-align: left;
         }
 
         .section-title {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+            font-size: clamp(2.4rem, 4vw, 3.8rem);
             color: var(--c-gold);
-            opacity: 0;
-            transform: translateY(30px);
+            line-height: 1.15;
+            margin-bottom: 0.4rem;
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-family: var(--f-body);
-            font-weight: 300;
+            font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 4rem;
-            color: inherit;
-            opacity: 0.7;
+            letter-spacing: 3px;
+            opacity: 0.6;
+        }
+
+        /* Top Sticky Navigation Bar */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 3rem;
+            background: rgba(18, 17, 16, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(200, 162, 101, 0.15);
+            transition: padding 0.3s ease, background 0.3s ease;
+        }
+
+        .site-header.scrolled {
+            padding: 0.7rem 3rem;
+            background: rgba(18, 17, 16, 0.96);
+            border-bottom: 1px solid rgba(200, 162, 101, 0.25);
+        }
+
+        .header-brand {
+            font-family: var(--f-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--c-light);
+            letter-spacing: 1px;
+        }
+
+        .header-brand span {
+            color: var(--c-gold);
+        }
+
+        .nav-chapters {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 0.88rem;
+            color: rgba(246, 242, 236, 0.75);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 400;
+            padding: 0.3rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--c-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--c-gold);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(200, 162, 101, 0.3);
+            border-radius: 20px;
+            padding: 2px 4px;
+            gap: 2px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: rgba(246, 242, 236, 0.6);
+            padding: 4px 10px;
+            font-family: var(--f-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--c-gold);
+            color: #121110;
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--c-light);
         }
 
         /* Custom Cursor */
@@ -83,51 +212,33 @@
             border-radius: 50%;
             z-index: 9999;
             pointer-events: none;
+            display: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-dot, .cursor-outline {
+                display: block;
+            }
         }
 
         .cursor-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background-color: var(--c-gold);
+            transition: opacity 0.2s ease;
         }
 
         .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--c-gold);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-
-        /* Nav Dots */
-        .nav-dots {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .nav-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: transparent;
-            border: 1px solid var(--c-gold);
-            transition: all 0.3s ease;
-        }
-
-        .nav-dot.active {
-            background-color: var(--c-gold);
-            transform: scale(1.3);
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(200, 162, 101, 0.6);
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
         }
 
         /* Layout & Sections */
         section {
             min-height: 100vh;
-            padding: 100px 5vw;
+            padding: 130px 6vw 90px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -140,146 +251,173 @@
         }
 
         .sepia-bg {
-            background-color: #3b281f;
+            background-color: #2b1d16;
             color: var(--c-light);
         }
 
-        /* Image Placeholders */
-        .img-placeholder {
-            background: rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(0,0,0,0.1);
-            color: rgba(0,0,0,0.4);
-            font-family: var(--f-body);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease, box-shadow 0.4s ease;
-            border-radius: 4px;
-        }
-
-        .img-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .img-placeholder:hover img {
-            transform: scale(1.06);
-        }
-
-        .dark-bg .img-placeholder, .sepia-bg .img-placeholder {
-            background: rgba(255,255,255,0.03);
-            border-color: rgba(255,255,255,0.05);
-            color: rgba(255,255,255,0.3);
-        }
-
-        .img-placeholder::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.05) 50%, transparent 55%);
-            background-size: 200% 200%;
-            animation: shimmer 3s infinite linear;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* S0: Hero */
+        /* Hero */
         .hero {
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle at center, var(--c-brown) 0%, var(--c-dark) 100%);
+            background: radial-gradient(circle at center, #2e180f 0%, #121110 75%);
             overflow: hidden;
+            padding-top: 140px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--c-gold);
+            margin-bottom: 1.5rem;
+            padding: 6px 16px;
+            border: 1px solid rgba(200, 162, 101, 0.35);
+            border-radius: 30px;
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 8rem);
-            line-height: 1.1;
-            margin-bottom: 1rem;
+            font-size: clamp(2.8rem, 7vw, 6.5rem);
+            line-height: 1.08;
+            margin-bottom: 1.5rem;
             letter-spacing: 2px;
+            color: var(--c-light);
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            color: var(--c-light);
         }
 
         .hero-title .char {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
             display: inline-block;
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            font-family: var(--f-body);
+            font-size: clamp(1.1rem, 2vw, 1.45rem);
             font-weight: 300;
             color: var(--c-gold);
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            opacity: 0;
-            transform: translateY(20px);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-gold {
+            background: var(--c-gold);
+            color: #121110;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 1px solid var(--c-gold);
+        }
+
+        .btn-gold:hover {
+            background: var(--c-gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(200, 162, 101, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--c-light);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(246, 242, 236, 0.3);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--c-gold);
+            color: var(--c-gold);
+            transform: translateY(-2px);
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             color: var(--c-gold);
-            font-size: 2rem;
+            font-size: 1.6rem;
             animation: bounce 2s infinite ease-in-out;
+            opacity: 0.8;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, 15px); }
+            50% { transform: translate(-50%, 12px); }
         }
 
-        /* S1: Bio */
+        /* Bio */
         .bio-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1200px;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 4.5rem;
+            max-width: 1300px;
             margin: 0 auto;
+            align-items: start;
+        }
+
+        .bio-photo-wrapper {
+            position: sticky;
+            top: 130px;
         }
 
         .bio-photo {
-            height: 600px;
-            border-radius: 4px;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(200, 162, 101, 0.3);
+            background: #1a120e;
+        }
+
+        .bio-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .bio-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--c-gold);
+            text-align: center;
         }
 
         .bio-text p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.4rem;
             font-size: 1.1rem;
-            color: rgba(255,255,255,0.8);
-            opacity: 0;
-            transform: translateY(20px);
+            color: rgba(246, 242, 236, 0.88);
+            line-height: 1.8;
         }
 
         .bio-timeline {
-            margin-top: 3rem;
-            border-left: 1px solid var(--c-gold);
-            padding-left: 2rem;
+            margin-top: 2.5rem;
+            border-left: 2px solid var(--c-gold);
+            padding-left: 1.8rem;
         }
 
         .timeline-item {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.6rem;
             position: relative;
-            opacity: 0;
-            transform: translateX(-20px);
         }
 
         .timeline-item::before {
@@ -287,65 +425,185 @@
             position: absolute;
             left: -37px;
             top: 6px;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: var(--c-gold);
             border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(200, 162, 101, 0.25);
         }
 
         .timeline-year {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--c-gold);
+            font-size: 1.05rem;
             margin-bottom: 0.2rem;
+            font-family: var(--f-heading);
         }
 
-        /* S2: Workshop */
-        .workshop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1400px;
+        .timeline-desc {
+            color: rgba(246, 242, 236, 0.78);
+            font-size: 0.95rem;
+        }
+
+        /* Photo Galleries - Editorial Masonry Layout */
+        .photo-editorial-grid {
+            column-count: 3;
+            column-gap: 28px;
+            max-width: 1500px;
             margin: 0 auto;
             width: 100%;
         }
 
-        .workshop-item {
-            height: 350px;
-            opacity: 0;
-            transform: scale(0.95);
-        }
-
-        /* S3: Portraits */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .gallery-item {
-            height: 450px;
+        .editorial-card {
+            break-inside: avoid;
+            margin-bottom: 28px;
+            background: var(--c-card-bg);
+            border: 1px solid var(--c-card-border);
+            border-radius: 8px;
             overflow: hidden;
             position: relative;
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
         }
 
-        .gallery-item:hover .img-placeholder {
+        .editorial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+            border-color: rgba(200, 162, 101, 0.5);
+        }
+
+        .editorial-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .editorial-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .card-caption {
+            padding: 14px 18px;
+            background: rgba(18, 17, 16, 0.85);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-caption-title {
+            font-size: 0.9rem;
+            color: var(--c-light);
+            font-weight: 500;
+        }
+
+        .card-zoom-icon {
+            color: var(--c-gold);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Workshop Grid (7 photos) - Asymmetrical Featured Layout */
+        .workshop-featured-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            max-width: 1500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .ws-item-large {
+            grid-column: span 6;
+            height: 480px;
+        }
+
+        .ws-item-medium {
+            grid-column: span 4;
+            height: 380px;
+        }
+
+        .ws-item-small {
+            grid-column: span 3;
+            height: 320px;
+        }
+
+        .ws-card {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--c-card-border);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .ws-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(200, 162, 101, 0.5);
+        }
+
+        .ws-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .ws-card:hover img {
             transform: scale(1.05);
         }
 
-        .quote {
-            max-width: 800px;
-            margin: 4rem auto 0;
+        .quote-box {
+            max-width: 900px;
+            margin: 4.5rem auto 0;
             text-align: center;
             font-family: var(--f-heading);
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 2.5vw, 1.85rem);
             font-style: italic;
             color: var(--c-gold);
+            line-height: 1.5;
+            padding: 0 2rem;
+            position: relative;
         }
 
-        /* Horizontal Scroll Sections (S4, S8) */
+        .quote-box::before {
+            content: '“';
+            font-size: 5rem;
+            line-height: 0;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            opacity: 0.25;
+            color: var(--c-gold);
+            font-family: var(--f-heading);
+        }
+
+        /* Image Placeholders for Future Sections */
+        .img-placeholder {
+            background: rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(200, 162, 101, 0.25);
+            color: rgba(200, 162, 101, 0.6);
+            font-family: var(--f-body);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        .img-placeholder:hover {
+            border-color: var(--c-gold);
+        }
+
+        /* Horizontal Scroll Sections */
         .horizontal-section {
             padding: 0;
             height: 100vh;
@@ -358,62 +616,64 @@
             display: flex;
             height: 100%;
             align-items: center;
-            padding: 0 10vw;
+            padding: 0 8vw;
             width: max-content;
+        }
+
+        .horizontal-title-area {
+            width: 32vw;
+            flex-shrink: 0;
+            padding-right: 4vw;
         }
 
         .horizontal-content {
             display: flex;
-            gap: 5vw;
+            gap: 2.5vw;
         }
 
         .drawing-item {
-            width: 500px;
-            height: 600px;
-            flex-shrink: 0;
-        }
-        
-        .horizontal-title-area {
-            width: 40vw;
+            width: 440px;
+            height: 580px;
             flex-shrink: 0;
         }
 
-        /* S5: Sculpture */
+        /* Sculpture */
         .sculpture-section {
-            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
+            background: radial-gradient(circle at 50% 50%, #1f140f 0%, #0d0c0b 100%);
         }
 
         .sculpture-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 50px;
+            gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
         }
 
         .sculpture-item {
-            height: 600px;
+            height: 520px;
         }
 
         .sculpture-item:nth-child(even) {
-            margin-top: 100px;
+            margin-top: 60px;
         }
 
-        /* S6: Video */
+        /* Video */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 28px;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
         }
 
         .video-item {
-            height: 400px;
+            height: 380px;
             position: relative;
-            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .play-button {
@@ -421,62 +681,70 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
+            width: 66px;
+            height: 66px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            border: 2px solid var(--c-light);
+            background: rgba(200, 162, 101, 0.25);
+            border: 2px solid var(--c-gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s;
-            z-index: 10;
+            transition: all 0.3s ease;
         }
 
         .play-button::after {
             content: '';
+            display: block;
             width: 0;
             height: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 15px;
-            border-color: transparent transparent transparent var(--c-light);
-            margin-left: 5px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 16px solid var(--c-gold);
+            margin-left: 4px;
         }
 
         .video-item:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.15);
             background: var(--c-gold);
-            border-color: var(--c-gold);
-            transform: translate(-50%, -50%) scale(1.1);
         }
 
-        /* S7: Design */
+        .video-item:hover .play-button::after {
+            border-left-color: #121110;
+        }
+
+        /* Design */
+        .design-section {
+            background-color: #ECE5DC;
+            color: #1a1918;
+        }
+
         .design-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
+            align-items: center;
         }
 
         .design-list {
             list-style: none;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .design-list li {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            font-size: 1.1rem;
+            margin-bottom: 1.3rem;
+            padding-bottom: 1.3rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            font-size: 1.05rem;
         }
-        
+
         .design-list strong {
             display: block;
-            color: var(--c-gold);
+            color: #8c6827;
             font-family: var(--f-heading);
-            font-size: 1.3rem;
-            margin-bottom: 0.3rem;
+            font-size: 1.25rem;
+            margin-bottom: 0.2rem;
         }
 
         .design-grid {
@@ -486,57 +754,83 @@
         }
 
         .design-item {
-            height: 250px;
+            height: 240px;
         }
 
-        /* S8: Exhibitions */
+        /* Exhibitions */
         .exhibition-card {
-            width: 400px;
-            padding: 3rem;
-            background: var(--c-light);
-            border: 1px solid rgba(0,0,0,0.1);
+            width: 380px;
+            padding: 2.8rem;
+            background: #FDFBF8;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
             flex-shrink: 0;
-            height: 400px;
+            height: 380px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease;
+        }
+
+        .exhibition-card:hover {
+            transform: translateY(-6px);
         }
 
         .exhibition-card .year {
             font-family: var(--f-heading);
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--c-gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
         }
 
         .exhibition-card .title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1a1918;
+            margin-bottom: 0.4rem;
         }
 
         .exhibition-card .location {
-            color: rgba(0,0,0,0.6);
+            color: rgba(0, 0, 0, 0.6);
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* S9: Contact */
+        /* Contact */
         .contact-section {
             background-color: var(--c-dark);
             color: var(--c-light);
             text-align: center;
-            justify-content: center;
             align-items: center;
+            padding-bottom: 60px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--c-card-border);
+            border-radius: 12px;
+            padding: 3rem 4rem;
+            max-width: 600px;
+            margin: 2.5rem auto 3rem;
         }
 
         .contact-info {
-            font-size: 1.2rem;
-            margin: 2rem 0;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.4rem;
+            font-size: 1.25rem;
+        }
+
+        .contact-info a {
+            color: var(--c-light);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: color 0.25s ease;
         }
 
         .contact-info a:hover {
@@ -544,14 +838,148 @@
         }
 
         footer {
-            margin-top: 5rem;
-            opacity: 0.5;
-            font-size: 0.9rem;
+            margin-top: 3rem;
+            opacity: 0.6;
+            font-size: 0.88rem;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
+        /* Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(12, 11, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 85vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(200, 162, 101, 0.3);
+        }
+
+        .lightbox-caption {
+            margin-top: 15px;
+            color: var(--c-gold);
+            font-size: 1.05rem;
+            font-family: var(--f-heading);
+            letter-spacing: 0.5px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 2.2rem;
+            color: var(--c-light);
+            background: none;
+            border: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--c-gold);
+            transform: scale(1.15);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--c-light);
+            border: 1px solid rgba(200, 162, 101, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--c-gold);
+            color: #121110;
+        }
+
+        .lightbox-prev {
+            left: 30px;
+        }
+
+        .lightbox-next {
+            right: 30px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .photo-editorial-grid {
+                column-count: 2;
+            }
+            .ws-item-large {
+                grid-column: span 12;
+                height: 420px;
+            }
+            .ws-item-medium {
+                grid-column: span 6;
+                height: 340px;
+            }
+            .ws-item-small {
+                grid-column: span 6;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .site-header {
+                padding: 0.8rem 1.5rem;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+            }
+            .nav-chapters {
+                order: 3;
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 4px;
+                gap: 1rem;
+            }
             .bio-container, .design-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .bio-photo-wrapper {
+                position: static;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .video-grid {
                 grid-template-columns: 1fr;
             }
             .sculpture-grid {
@@ -560,12 +988,15 @@
             .sculpture-item:nth-child(even) {
                 margin-top: 0;
             }
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
         }
-        
+
         @media (max-width: 768px) {
+            .photo-editorial-grid {
+                column-count: 1;
+            }
+            .ws-item-medium, .ws-item-small {
+                grid-column: span 12;
+            }
             .horizontal-section {
                 height: auto;
                 padding: 100px 5vw;
@@ -581,14 +1012,24 @@
                 flex-direction: column;
                 width: 100%;
             }
-            .drawing-item, .exhibition-card, .horizontal-title-area {
+            .horizontal-title-area {
                 width: 100%;
-                height: auto;
-                min-height: 300px;
+                padding-right: 0;
                 margin-bottom: 2rem;
             }
+            .drawing-item, .exhibition-card {
+                width: 100%;
+                height: auto;
+                min-height: 320px;
+                margin-bottom: 1.5rem;
+            }
+            .contact-card {
+                padding: 2rem 1.5rem;
+            }
+            .lightbox-nav {
+                display: none;
+            }
         }
-
     </style>
 </head>
 <body>
@@ -597,25 +1038,41 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- Navigation Dots -->
-    <div class="nav-dots">
-        <a href="#hero" class="nav-dot active" data-index="0"></a>
-        <a href="#bio" class="nav-dot" data-index="1"></a>
-        <a href="#workshop" class="nav-dot" data-index="2"></a>
-        <a href="#portraits" class="nav-dot" data-index="3"></a>
-        <a href="#drawings" class="nav-dot" data-index="4"></a>
-        <a href="#sculpture" class="nav-dot" data-index="5"></a>
-        <a href="#video" class="nav-dot" data-index="6"></a>
-        <a href="#design" class="nav-dot" data-index="7"></a>
-        <a href="#exhibitions" class="nav-dot" data-index="8"></a>
-        <a href="#contact" class="nav-dot" data-index="9"></a>
-    </div>
+    <!-- Top Sticky Header with Chapter Navigation & Language Switcher -->
+    <header class="site-header" id="site-header">
+        <a href="#hero" class="header-brand">IBRAIMHOJO <span>BAKIROV</span></a>
+        
+        <nav>
+            <ul class="nav-chapters">
+                <li><a href="#bio" class="nav-link" data-i18n="nav_bio">Biographie</a></li>
+                <li><a href="#workshop" class="nav-link" data-i18n="nav_workshop">Atelier</a></li>
+                <li><a href="#portraits" class="nav-link" data-i18n="nav_portraits">Portraits</a></li>
+                <li><a href="#drawings" class="nav-link" data-i18n="nav_drawings">Dessins</a></li>
+                <li><a href="#sculpture" class="nav-link" data-i18n="nav_sculpture">Sculptures</a></li>
+                <li><a href="#video" class="nav-link" data-i18n="nav_video">Vidéos</a></li>
+                <li><a href="#design" class="nav-link" data-i18n="nav_design">Design</a></li>
+                <li><a href="#exhibitions" class="nav-link" data-i18n="nav_exhibitions">Expositions</a></li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="fr">FR</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+    </header>
 
     <!-- Section 0: HERO -->
     <section id="hero" class="hero dark-bg" data-index="0">
         <div class="hero-content">
+            <div class="hero-badge" data-i18n="hero_badge">Portefeuille d'art contemporain</div>
             <h1 class="hero-title" id="hero-title">IBRAIMHOJO BAKIROV</h1>
-            <p class="hero-subtitle">Artiste plasticien, sculpteur et photographe</p>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Artiste plasticien, sculpteur et photographe</p>
+            <div class="hero-actions">
+                <a href="#portraits" class="btn-gold" data-i18n="btn_view_art">Voir les œuvres</a>
+                <a href="#bio" class="btn-outline" data-i18n="btn_biography">Biographie</a>
+            </div>
         </div>
         <div class="scroll-indicator">↓</div>
     </section>
@@ -623,45 +1080,50 @@
     <!-- Section 1: BIOGRAPHY -->
     <section id="bio" class="sepia-bg" data-index="1">
         <div class="bio-container">
-            <div class="bio-photo">
-                <div class="img-placeholder" data-category="portrait-artiste">
-                    <img src="images/ibra_portrait_header.jpg" alt="Ibraimhojo Bakirov - Portrait de l'artiste" loading="lazy">
+            <div class="bio-photo-wrapper">
+                <div class="bio-photo">
+                    <img src="images/ibra_portrait_header.jpg" alt="Ibraimhojo Bakirov - Portrait de l'artiste" class="clickable-img" data-caption="Ibraimhojo Bakirov — Artiste plasticien, sculpteur et photographe">
                 </div>
+                <div class="bio-caption" data-i18n="bio_photo_caption">Ibraimhojo Bakirov en train de créer</div>
             </div>
+            
             <div class="bio-text">
-                <h2 class="section-title">Biographie</h2>
-                <h3 class="section-subtitle">Биография</h3>
+                <div class="section-header text-left">
+                    <h2 class="section-title" data-i18n="bio_title">Biographie</h2>
+                    <h3 class="section-subtitle" data-i18n="bio_subtitle">Parcours artistique</h3>
+                </div>
                 
                 <div class="bio-paragraphs">
-                    <p>Ibraimhojo Bakirov, diplômé de l'Académie d'État des Beaux-Arts A. L. Stieglitz à Saint-Pétersbourg (1981), poursuit aujourd'hui sa carrière artistique à l'Académie des Beaux-Arts de Molenbeek à Bruxelles. Son œuvre se situe entre tradition réaliste et avant-garde européenne, unissant émotion et réflexion.</p>
-                    <p>Sur la toile, Bakirov explore la psychologie humaine et la relation de l'homme au monde à travers un langage visuel fondé sur le mouvement, la lumière et la couleur. Ses portraits traduisent l'unité et la profondeur de la nature humaine, fusionnant imagination et réalité.</p>
-                    <p>Dans ses œuvres sépia, il saisit la dimension spirituelle et l'instant de la réflexion intérieure. Certains critiques décrivent son style comme un « romantisme abstrait », mêlant mystère et émotion.</p>
+                    <p data-i18n="bio_p1">Ibraimhojo Bakirov, diplômé de l'Académie d'État des Beaux-Arts A. L. Stieglitz à Saint-Pétersbourg (1981), poursuit aujourd'hui sa carrière artistique à l'Académie des Beaux-Arts de Molenbeek à Bruxelles. Son œuvre se situe entre tradition réaliste et avant-garde européenne, unissant émotion et réflexion.</p>
+                    <p data-i18n="bio_p2">Sur la toile, Bakirov explore la psychologie humaine et la relation de l'homme au monde à travers un langage visuel fondé sur le mouvement, la lumière et la couleur. Ses portraits traduisent l'unité et la profondeur de la nature humaine, fusionnant imagination et réalité.</p>
+                    <p data-i18n="bio_p3">Dans ses œuvres sépia, il saisit la dimension spirituelle et l'instant de la réflexion intérieure. Certains critiques décrivent son style comme un « romantisme abstrait », mêlant mystère et émotion.</p>
+                    <p data-i18n="bio_p4">Sculpteur humaniste, il révèle la beauté intérieure à travers la matière — métal, cuivre, bois ou verre. Son œuvre La mesure de la liberté illustre la tension entre liberté et contrainte.</p>
                 </div>
 
                 <div class="bio-timeline">
                     <div class="timeline-item">
                         <div class="timeline-year">1957</div>
-                        <div>Naissance au village de Toguz-Bulak, district de Leilek, Kirghizistan</div>
+                        <div class="timeline-desc" data-i18n="time_1957">Naissance au village de Toguz-Bulak, district de Leilek, Kirghizistan</div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-year">1981</div>
-                        <div>Diplômé de l'École supérieure d'art industriel de Leningrad (A.L. Stieglitz)</div>
+                        <div class="timeline-desc" data-i18n="time_1981">Diplômé de l'École supérieure d'art industriel de Leningrad (Académie A.L. Stieglitz)</div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-year">1988</div>
-                        <div>Membre de l'Union des Artistes et Designers (URSS, Kirghizistan)</div>
+                        <div class="timeline-desc" data-i18n="time_1988">Membre des Unions des Artistes et Designers d'URSS et du Kirghizistan</div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-year">1996 - 1997</div>
-                        <div>Vice-recteur, Académie nationale des beaux-arts du Kirghizistan</div>
+                        <div class="timeline-year">1996 – 1997</div>
+                        <div class="timeline-desc" data-i18n="time_1996">Vice-recteur, Académie nationale des Beaux-Arts du Kirghizistan</div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-year">2001 - 2004</div>
-                        <div>Service diplomatique à l'Ambassade du Kirghizistan au Benelux et en France</div>
+                        <div class="timeline-year">2001 – 2004</div>
+                        <div class="timeline-desc" data-i18n="time_2001">Service diplomatique à l'Ambassade du Kirghizistan à Bruxelles (invité par Tchinguiz Aïtmatov)</div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-year">Aujourd'hui</div>
-                        <div>Académie des Beaux-Arts de Molenbeek, Bruxelles</div>
+                        <div class="timeline-year" data-i18n="time_today_title">Aujourd'hui</div>
+                        <div class="timeline-desc" data-i18n="time_today">Académie des Beaux-Arts de Molenbeek, Bruxelles, Belgique</div>
                     </div>
                 </div>
             </div>
@@ -670,148 +1132,178 @@
 
     <!-- Section 2: WORKSHOP -->
     <section id="workshop" class="dark-bg" data-index="2">
-        <h2 class="section-title text-center">L'Atmosphère de l'Atelier</h2>
-        <h3 class="section-subtitle text-center">Атмосфера Мастерской</h3>
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="workshop_title">L'Atmosphère de l'Atelier</h2>
+            <h3 class="section-subtitle" data-i18n="workshop_subtitle">Le sanctuaire de la création</h3>
+        </div>
         
-        <div class="workshop-grid">
-            <div class="workshop-item">
-                <div class="img-placeholder" data-category="workshop">
-                    <img src="images/workshop/IMG-20261006-WA0033(1).jpg" alt="Atelier Ibraimhojo Bakirov 1" loading="lazy">
-                </div>
+        <div class="workshop-featured-grid">
+            <div class="ws-card ws-item-large">
+                <img src="images/workshop/IMG-20261006-WA0033(1).jpg" alt="Atelier Ibraimhojo Bakirov" class="clickable-img" data-caption="Atelier de création — Perspective d'ensemble" loading="lazy">
             </div>
-            <div class="workshop-item">
-                <div class="img-placeholder" data-category="workshop">
-                    <img src="images/workshop/IMG-20261006-WA0034(1).jpg" alt="Atelier Ibraimhojo Bakirov 2" loading="lazy">
-                </div>
+            <div class="ws-card ws-item-large">
+                <img src="images/workshop/IMG-20261006-WA0034(1).jpg" alt="Atelier Ibraimhojo Bakirov" class="clickable-img" data-caption="Espace de travail et esquisses" loading="lazy">
             </div>
-            <div class="workshop-item">
-                <div class="img-placeholder" data-category="workshop">
-                    <img src="images/workshop/IMG-20261006-WA0035(1).jpg" alt="Atelier Ibraimhojo Bakirov 3" loading="lazy">
-                </div>
+            <div class="ws-card ws-item-medium">
+                <img src="images/workshop/IMG-20261006-WA0035(1).jpg" alt="Atelier Ibraimhojo Bakirov" class="clickable-img" data-caption="Matériaux, pigments et outils" loading="lazy">
             </div>
-            <div class="workshop-item">
-                <div class="img-placeholder" data-category="workshop">
-                    <img src="images/workshop/IMG-20261006-WA0036(1).jpg" alt="Atelier Ibraimhojo Bakirov 4" loading="lazy">
-                </div>
+            <div class="ws-card ws-item-medium">
+                <img src="images/workshop/IMG-20261006-WA0036(1).jpg" alt="Atelier Ibraimhojo Bakirov" class="clickable-img" data-caption="Études de visages et modelages" loading="lazy">
             </div>
-            <div class="workshop-item">
-                <div class="img-placeholder" data-category="workshop">
-                    <img src="images/workshop/IMG-20261006-WA0037(1).jpg" alt="Atelier Ibraimhojo Bakirov 5" loading="lazy">
-                </div>
+            <div class="ws-card ws-item-medium">
+                <img src="images/workshop/IMG-20261006-WA0037(1).jpg" alt="Atelier Ibraimhojo Bakirov" class="clickable-img" data-caption="Lumière naturelle sur les toiles" loading="lazy">
             </div>
-            <div class="workshop-item">
-                <div class="img-placeholder" data-category="workshop">
-                    <img src="images/workshop/IMG-20261006-WA0038(1).jpg" alt="Atelier Ibraimhojo Bakirov 6" loading="lazy">
-                </div>
+            <div class="ws-card ws-item-large">
+                <img src="images/workshop/IMG-20261006-WA0038(1).jpg" alt="Atelier Ibraimhojo Bakirov" class="clickable-img" data-caption="Sculptures et compositions en cours" loading="lazy">
             </div>
-            <div class="workshop-item">
-                <div class="img-placeholder" data-category="workshop">
-                    <img src="images/workshop/IMG-20261006-WA0039(1).jpg" alt="Atelier Ibraimhojo Bakirov 7" loading="lazy">
-                </div>
+            <div class="ws-card ws-item-large">
+                <img src="images/workshop/IMG-20261006-WA0039(1).jpg" alt="Atelier Ibraimhojo Bakirov" class="clickable-img" data-caption="Vue intime sur les œuvres terminées" loading="lazy">
             </div>
+        </div>
+
+        <div class="quote-box" data-i18n="workshop_quote">
+            L'atelier est le lieu où le silence se transforme en couleur et où la pensée prend forme dans la matière.
         </div>
     </section>
 
     <!-- Section 3: PORTRAITS -->
-    <section id="portraits" data-index="3">
-        <h2 class="section-title">Portraits</h2>
-        <h3 class="section-subtitle">Портреты</h3>
+    <section id="portraits" class="dark-bg" data-index="3" style="background-color: #171513;">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="portraits_title">Portraits</h2>
+            <h3 class="section-subtitle" data-i18n="portraits_subtitle">Regard et psychologie humaine</h3>
+        </div>
         
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261003-WA0032(1).jpg" alt="Portrait par Ibraimhojo Bakirov 1" loading="lazy">
+        <div class="photo-editorial-grid">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261003-WA0032(1).jpg" alt="Portrait" class="clickable-img" data-caption="Portrait I — Étude psychologique" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait I</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261003-WA0043(1).jpg" alt="Portrait par Ibraimhojo Bakirov 2" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261003-WA0043(1).jpg" alt="Portrait" class="clickable-img" data-caption="Portrait II — L'expression de l'âme" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait II</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261003-WA0044(1).jpg" alt="Portrait par Ibraimhojo Bakirov 3" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261003-WA0044(1).jpg" alt="Portrait" class="clickable-img" data-caption="Portrait III — Harmonie chromatique" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait III</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261003-WA0046(1).jpg" alt="Portrait par Ibraimhojo Bakirov 4" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261003-WA0046(1).jpg" alt="Portrait" class="clickable-img" data-caption="Portrait IV — Ombre et lumière" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait IV</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0016.jpg" alt="Portrait par Ibraimhojo Bakirov 5" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0016.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait V — Composition sépia" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait V</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0018.jpg" alt="Portrait par Ibraimhojo Bakirov 6" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0018.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait VI — Profondeur du regard" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait VI</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0020.jpg" alt="Portrait par Ibraimhojo Bakirov 7" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0020.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait VII — Étude de caractère" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait VII</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0022.jpg" alt="Portrait par Ibraimhojo Bakirov 8" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0022.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait VIII — Résonance poétique" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait VIII</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0023.jpg" alt="Portrait par Ibraimhojo Bakirov 9" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0023.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait IX — Sérénité" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait IX</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0024.jpg" alt="Portrait par Ibraimhojo Bakirov 10" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0024.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait X — Force et douceur" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait X</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0025.jpg" alt="Portrait par Ibraimhojo Bakirov 11" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0025.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XI — Nuances expressives" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XI</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0026.jpg" alt="Portrait par Ibraimhojo Bakirov 12" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0026.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XII — Visage contemplatif" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XII</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0027.jpg" alt="Portrait par Ibraimhojo Bakirov 13" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0027.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XIII — La voix silencieuse" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XIII</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0028.jpg" alt="Portrait par Ibraimhojo Bakirov 14" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0028.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XIV — Réflexion intérieure" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XIV</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0029.jpg" alt="Portrait par Ibraimhojo Bakirov 15" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0029.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XV — Évocation du temps" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XV</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0030.jpg" alt="Portrait par Ibraimhojo Bakirov 16" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0030.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XVI — Sensibilité humaine" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XVI</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0031.jpg" alt="Portrait par Ibraimhojo Bakirov 17" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0031.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XVII — Romantisme abstrait" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XVII</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
-            <div class="gallery-item">
-                <div class="img-placeholder" data-category="portrait">
-                    <img src="images/portraits/IMG-20261006-WA0032.jpg" alt="Portrait par Ibraimhojo Bakirov 18" loading="lazy">
+            <div class="editorial-card">
+                <img src="images/portraits/IMG-20261006-WA0032.jpg" alt="Portrait" class="clickable-img" data-caption="Portrait XVIII — Regard universel" loading="lazy">
+                <div class="card-caption">
+                    <span class="card-caption-title">Portrait XVIII</span>
+                    <span class="card-zoom-icon">⤢</span>
                 </div>
             </div>
         </div>
         
-        <div class="quote">
-            "Ses portraits traduisent l'unité et la profondeur de la nature humaine, fusionnant imagination et réalité."
+        <div class="quote-box" data-i18n="portraits_quote">
+            Ses portraits traduisent l'unité et la profondeur de la nature humaine, fusionnant imagination et réalité.
         </div>
     </section>
 
@@ -819,90 +1311,100 @@
     <section id="drawings" class="horizontal-section" data-index="4">
         <div class="horizontal-wrapper">
             <div class="horizontal-title-area">
-                <h2 class="section-title">Dessins</h2>
-                <h3 class="section-subtitle">Рисунки</h3>
-                <p style="max-width: 400px; margin-top: 2rem;">L'esthétique de l'esquisse au crayon, une exploration des formes brutes et des expressions éphémères avant qu'elles ne prennent vie sur la toile ou dans la matière.</p>
+                <h2 class="section-title" data-i18n="drawings_title">Dessins</h2>
+                <h3 class="section-subtitle" data-i18n="drawings_subtitle">L'art du trait et de l'esquisse</h3>
+                <p style="margin-top: 1.8rem; font-size: 1.05rem; opacity: 0.85;" data-i18n="drawings_desc">L'esthétique de l'esquisse au crayon, une exploration des formes brutes et des expressions éphémères avant qu'elles ne prennent vie sur la toile ou dans la matière.</p>
             </div>
             <div class="horizontal-content">
-                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin 1</span></div></div>
-                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin 2</span></div></div>
-                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin 3</span></div></div>
-                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin 4</span></div></div>
-                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin 5</span></div></div>
-                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin 6</span></div></div>
+                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin I</span></div></div>
+                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin II</span></div></div>
+                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin III</span></div></div>
+                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin IV</span></div></div>
+                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin V</span></div></div>
+                <div class="drawing-item"><div class="img-placeholder" data-category="drawing"><span>Dessin VI</span></div></div>
             </div>
         </div>
     </section>
 
     <!-- Section 5: SCULPTURE -->
     <section id="sculpture" class="sculpture-section dark-bg" data-index="5">
-        <h2 class="section-title text-center">Sculptures</h2>
-        <h3 class="section-subtitle text-center">Скульптуры</h3>
-        
-        <div class="sculpture-grid">
-            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>Sculpture 1</span></div></div>
-            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>Sculpture 2</span></div></div>
-            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>Sculpture 3</span></div></div>
-            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>Sculpture 4</span></div></div>
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="sculpture_title">Sculptures</h2>
+            <h3 class="section-subtitle" data-i18n="sculpture_subtitle">Matière, équilibre et mouvement</h3>
         </div>
         
-        <div class="quote" style="margin-top: 5rem;">
-            "Sculpteur humaniste, il révèle la beauté intérieure à travers la matière — métal, cuivre, bois ou verre. Son œuvre 'La mesure de la liberté' illustre la tension entre liberté et contrainte."
+        <div class="sculpture-grid">
+            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>La mesure de la liberté</span></div></div>
+            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>L'Homme traversant le mur</span></div></div>
+            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>Autoportrait cinétique</span></div></div>
+            <div class="sculpture-item"><div class="img-placeholder" data-category="sculpture"><span>L'Artiste</span></div></div>
+        </div>
+        
+        <div class="quote-box" style="margin-top: 4.5rem;" data-i18n="sculpture_quote">
+            Sculpteur humaniste, il révèle la beauté intérieure à travers la matière — métal, cuivre, bois ou verre.
         </div>
     </section>
 
     <!-- Section 6: VIDEO -->
-    <section id="video" data-index="6">
-        <h2 class="section-title">Vidéos</h2>
-        <h3 class="section-subtitle">Видео</h3>
+    <section id="video" class="dark-bg" data-index="6" style="background-color: #151413;">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="video_title">Vidéos</h2>
+            <h3 class="section-subtitle" data-i18n="video_subtitle">L'artiste en action</h3>
+        </div>
         
         <div class="video-grid">
             <div class="video-item hoverable">
-                <div class="img-placeholder" data-category="video"><span>Vidéo 1</span></div>
+                <div class="img-placeholder" data-category="video"><span>L'Atelier en mouvement</span></div>
                 <div class="play-button"></div>
             </div>
             <div class="video-item hoverable">
-                <div class="img-placeholder" data-category="video"><span>Vidéo 2</span></div>
+                <div class="img-placeholder" data-category="video"><span>Processus de sculpture</span></div>
                 <div class="play-button"></div>
             </div>
             <div class="video-item hoverable">
-                <div class="img-placeholder" data-category="video"><span>Vidéo 3</span></div>
+                <div class="img-placeholder" data-category="video"><span>Exposition Evere 2025</span></div>
                 <div class="play-button"></div>
             </div>
         </div>
     </section>
 
     <!-- Section 7: DESIGN -->
-    <section id="design" data-index="7" style="background-color: #e8e2d9;">
+    <section id="design" class="design-section" data-index="7">
         <div class="design-container">
             <div class="design-info">
-                <h2 class="section-title">Design</h2>
-                <h3 class="section-subtitle">Дизайн</h3>
+                <div class="section-header text-left">
+                    <h2 class="section-title" style="color: #8c6827;" data-i18n="design_title">Design</h2>
+                    <h3 class="section-subtitle" style="color: #555;" data-i18n="design_subtitle">Création appliquée & Muséographie</h3>
+                </div>
                 
                 <ul class="design-list">
                     <li>
                         <strong>2011</strong>
-                        Conception de l'exposition de photos de l'UNESCO
+                        <span data-i18n="design_item_2011">Design de l'exposition photo UNESCO « Femmes du Kirghizistan pour la paix et la tolérance », Paris</span>
+                    </li>
+                    <li>
+                        <strong>2010</strong>
+                        <span data-i18n="design_item_2010">Projet de design d'intérieur « Espace universel », Bruxelles</span>
                     </li>
                     <li>
                         <strong>1995</strong>
-                        Création du logo de la Fondation Soros Kirghizistan
+                        <span data-i18n="design_item_1995_soros">Conception officielle du logo de la Fondation Soros Kirghizistan</span>
                     </li>
                     <li>
                         <strong>1995</strong>
-                        Design pour le 1000e anniversaire de l'épopée Manas
+                        <span data-i18n="design_item_1995_manas">Design muséal pour le 1000e anniversaire de l'épopée Manas (Complexe Manas-Ordo)</span>
                     </li>
                     <li>
-                        <strong>Éducation</strong>
-                        Fondateur de la Faculté de Design à l'École d'art S.A. Chuikov
+                        <strong data-i18n="design_edu_title">Pédagogie</strong>
+                        <span data-i18n="design_edu_desc">Fondateur de la Faculté de Design à l'École d'art S.A. Chuikov (Frunze / Bichkek)</span>
                     </li>
                 </ul>
             </div>
             <div class="design-grid">
-                <div class="design-item"><div class="img-placeholder" data-category="design"><span>Projet Design 1</span></div></div>
-                <div class="design-item"><div class="img-placeholder" data-category="design"><span>Projet Design 2</span></div></div>
-                <div class="design-item"><div class="img-placeholder" data-category="design"><span>Projet Design 3</span></div></div>
-                <div class="design-item"><div class="img-placeholder" data-category="design"><span>Projet Design 4</span></div></div>
+                <div class="design-item"><div class="img-placeholder" data-category="design"><span>UNESCO 2011</span></div></div>
+                <div class="design-item"><div class="img-placeholder" data-category="design"><span>Logo Fondation Soros</span></div></div>
+                <div class="design-item"><div class="img-placeholder" data-category="design"><span>Manas-Ordo 1000</span></div></div>
+                <div class="design-item"><div class="img-placeholder" data-category="design"><span>Musée Razzakov</span></div></div>
             </div>
         </div>
     </section>
@@ -911,53 +1413,58 @@
     <section id="exhibitions" class="horizontal-section dark-bg" data-index="8">
         <div class="horizontal-wrapper">
             <div class="horizontal-title-area">
-                <h2 class="section-title">Expositions</h2>
-                <h3 class="section-subtitle">Выставки</h3>
+                <h2 class="section-title" data-i18n="exhibitions_title">Expositions</h2>
+                <h3 class="section-subtitle" data-i18n="exhibitions_subtitle">Sélection internationale</h3>
             </div>
             <div class="horizontal-content">
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2025</div>
-                    <div class="title">Exposition individuelle</div>
+                    <div class="title" data-i18n="exh_2025_1">Exposition personnelle</div>
                     <div class="location">Municipalité d'Evere, Bruxelles</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2025</div>
-                    <div class="title">Vernissage des sculpteurs finalistes</div>
+                    <div class="title" data-i18n="exh_2025_2">Vernissage des finalistes sculpteurs</div>
                     <div class="location">Académie des Beaux-Arts de Molenbeek</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2024</div>
-                    <div class="title">Exposition individuelle</div>
+                    <div class="title" data-i18n="exh_2024">Exposition personnelle</div>
                     <div class="location">Centre Communautaire Maritime, Bruxelles</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2020</div>
-                    <div class="title">Exposition individuelle</div>
+                    <div class="title" data-i18n="exh_2020">Exposition personnelle</div>
                     <div class="location">Maison des Cultures Européennes, Bruxelles</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2016</div>
-                    <div class="title">Journée portes ouvertes de quatre artistes</div>
+                    <div class="title" data-i18n="exh_2016">Journée portes ouvertes de quatre artistes</div>
                     <div class="location">Bruxelles</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2015</div>
-                    <div class="title">Exposition internationale</div>
+                    <div class="title" data-i18n="exh_2015">Marche verte des couleurs universelles</div>
                     <div class="location">Agadir, Maroc</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2013</div>
-                    <div class="title">85e anniversaire de Chingiz Aitmatov</div>
+                    <div class="title" data-i18n="exh_2013">85e anniversaire de Tchinguiz Aïtmatov</div>
                     <div class="location">Centre Culturel Goethe, Bruxelles</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
                     <div class="year">2009</div>
-                    <div class="title">Exposition individuelle</div>
+                    <div class="title" data-i18n="exh_2009">Exposition personnelle</div>
                     <div class="location">Château de Montigny-le-Gannelon, France</div>
                 </div>
-                <div class="exhibition-card text-dark">
+                <div class="exhibition-card">
+                    <div class="year">2007</div>
+                    <div class="title" data-i18n="exh_2007">Peinture et sculpture</div>
+                    <div class="location">Siège de la Commission Européenne, Bruxelles</div>
+                </div>
+                <div class="exhibition-card">
                     <div class="year">1999</div>
-                    <div class="title">Exposition</div>
+                    <div class="title" data-i18n="exh_1999">Exposition des artistes kirghizes</div>
                     <div class="location">Parlement Européen, Bruxelles</div>
                 </div>
             </div>
@@ -966,24 +1473,358 @@
 
     <!-- Section 9: CONTACT -->
     <section id="contact" class="contact-section" data-index="9">
-        <h2 class="section-title">Contact</h2>
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="contact_title">Contact & Renseignements</h2>
+            <h3 class="section-subtitle" data-i18n="contact_subtitle">Galeries, collectionneurs et collaborations</h3>
+        </div>
         
-        <div class="contact-info">
-            <p>GSM: <a href="tel:+32487579651" class="hoverable">+32 487 57 96 51</a></p>
-            <p>Email: <a href="mailto:studiobak@mail.ru" class="hoverable">studiobak@mail.ru</a></p>
-            <p>Instagram: <a href="https://instagram.com/ibrahim_bakirov" target="_blank" class="hoverable">@ibrahim_bakirov</a></p>
+        <div class="contact-card">
+            <div class="contact-info">
+                <p>GSM: <a href="tel:+32487579651" class="hoverable">+32 487 57 96 51</a></p>
+                <p>Email: <a href="mailto:studiobak@mail.ru" class="hoverable">studiobak@mail.ru</a></p>
+                <p>Instagram: <a href="https://instagram.com/ibrahim_bakirov" target="_blank" rel="noopener noreferrer" class="hoverable">@ibrahim_bakirov</a></p>
+            </div>
         </div>
 
         <footer>
-            <p>&copy; 2023 Ibraimhojo Bakirov. Œuvres dans des collections privées et musées à travers le monde.</p>
+            <p data-i18n="footer_text">&copy; 2026 Ibraimhojo Bakirov. Œuvres conservées dans des musées et collections privées à travers le monde.</p>
         </footer>
     </section>
 
+    <!-- Lightbox Modal for Photo Zoom -->
+    <div class="lightbox-modal" id="lightbox-modal">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Précédent">&#10094;</button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Suivant">&#10095;</button>
+        <div class="lightbox-content">
+            <img src="" alt="Enlarged Art" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
-        // Custom Cursor
+        // Multi-language Translations Dictionary
+        const translations = {
+            fr: {
+                nav_bio: "Biographie",
+                nav_workshop: "Atelier",
+                nav_portraits: "Portraits",
+                nav_drawings: "Dessins",
+                nav_sculpture: "Sculptures",
+                nav_video: "Vidéos",
+                nav_design: "Design",
+                nav_exhibitions: "Expositions",
+                nav_contact: "Contact",
+                hero_badge: "Portefeuille d'art contemporain",
+                hero_subtitle: "Artiste plasticien, sculpteur et photographe",
+                btn_view_art: "Voir les œuvres",
+                btn_biography: "Biographie",
+                bio_photo_caption: "Ibraimhojo Bakirov en train de créer",
+                bio_title: "Biographie",
+                bio_subtitle: "Parcours artistique",
+                bio_p1: "Ibraimhojo Bakirov, diplômé de l'Académie d'État des Beaux-Arts A. L. Stieglitz à Saint-Pétersbourg (1981), poursuit aujourd'hui sa carrière artistique à l'Académie des Beaux-Arts de Molenbeek à Bruxelles. Son œuvre se situe entre tradition réaliste et avant-garde européenne, unissant émotion et réflexion.",
+                bio_p2: "Sur la toile, Bakirov explore la psychologie humaine et la relation de l'homme au monde à travers un langage visuel fondé sur le mouvement, la lumière et la couleur. Ses portraits traduisent l'unité et la profondeur de la nature humaine, fusionnant imagination et réalité.",
+                bio_p3: "Dans ses œuvres sépia, il saisit la dimension spirituelle et l'instant de la réflexion intérieure. Certains critiques décrivent son style comme un « romantisme abstrait », mêlant mystère et émotion.",
+                bio_p4: "Sculpteur humaniste, il révèle la beauté intérieure à travers la matière — métal, cuivre, bois ou verre. Son œuvre La mesure de la liberté illustre la tension entre liberté et contrainte.",
+                time_1957: "Naissance au village de Toguz-Bulak, district de Leilek, Kirghizistan",
+                time_1981: "Diplômé de l'École supérieure d'art industriel de Leningrad (Académie A.L. Stieglitz)",
+                time_1988: "Membre des Unions des Artistes et Designers d'URSS et du Kirghizistan",
+                time_1996: "Vice-recteur, Académie nationale des Beaux-Arts du Kirghizistan",
+                time_2001: "Service diplomatique à l'Ambassade du Kirghizistan à Bruxelles (invité par Tchinguiz Aïtmatov)",
+                time_today_title: "Aujourd'hui",
+                time_today: "Académie des Beaux-Arts de Molenbeek, Bruxelles, Belgique",
+                workshop_title: "L'Atmosphère de l'Atelier",
+                workshop_subtitle: "Le sanctuaire de la création",
+                workshop_quote: "L'atelier est le lieu où le silence se transforme en couleur et où la pensée prend forme dans la matière.",
+                portraits_title: "Portraits",
+                portraits_subtitle: "Regard et psychologie humaine",
+                portraits_quote: "Ses portraits traduisent l'unité et la profondeur de la nature humaine, fusionnant imagination et réalité.",
+                drawings_title: "Dessins",
+                drawings_subtitle: "L'art du trait et de l'esquisse",
+                drawings_desc: "L'esthétique de l'esquisse au crayon, une exploration des formes brutes et des expressions éphémères avant qu'elles ne prennent vie sur la toile ou dans la matière.",
+                sculpture_title: "Sculptures",
+                sculpture_subtitle: "Matière, équilibre et mouvement",
+                sculpture_quote: "Sculpteur humaniste, il révèle la beauté intérieure à travers la matière — métal, cuivre, bois ou verre.",
+                video_title: "Vidéos",
+                video_subtitle: "L'artiste en action",
+                design_title: "Design",
+                design_subtitle: "Création appliquée & Muséographie",
+                design_item_2011: "Design de l'exposition photo UNESCO « Femmes du Kirghizistan pour la paix et la tolérance », Paris",
+                design_item_2010: "Projet de design d'intérieur « Espace universel », Bruxelles",
+                design_item_1995_soros: "Conception officielle du logo de la Fondation Soros Kirghizistan",
+                design_item_1995_manas: "Design muséal pour le 1000e anniversaire de l'épopée Manas (Complexe Manas-Ordo)",
+                design_edu_title: "Pédagogie",
+                design_edu_desc: "Fondateur de la Faculté de Design à l'École d'art S.A. Chuikov (Frunze / Bichkek)",
+                exhibitions_title: "Expositions",
+                exhibitions_subtitle: "Sélection internationale",
+                exh_2025_1: "Exposition personnelle",
+                exh_2025_2: "Vernissage des finalistes sculpteurs",
+                exh_2024: "Exposition personnelle",
+                exh_2020: "Exposition personnelle",
+                exh_2016: "Journée portes ouvertes de quatre artistes",
+                exh_2015: "Marche verte des couleurs universelles",
+                exh_2013: "85e anniversaire de Tchinguiz Aïtmatov",
+                exh_2009: "Exposition personnelle",
+                exh_2007: "Peinture et sculpture",
+                exh_1999: "Exposition des artistes kirghizes",
+                contact_title: "Contact & Renseignements",
+                contact_subtitle: "Galeries, collectionneurs et collaborations",
+                footer_text: "© 2026 Ibraimhojo Bakirov. Œuvres conservées dans des musées et collections privées à travers le monde."
+            },
+            ru: {
+                nav_bio: "Биография",
+                nav_workshop: "Мастерская",
+                nav_portraits: "Портреты",
+                nav_drawings: "Рисунки",
+                nav_sculpture: "Скульптура",
+                nav_video: "Видео",
+                nav_design: "Дизайн",
+                nav_exhibitions: "Выставки",
+                nav_contact: "Контакты",
+                hero_badge: "Портфолио современного искусства",
+                hero_subtitle: "Художник, скульптор и фотограф",
+                btn_view_art: "Смотреть работы",
+                btn_biography: "Биография",
+                bio_photo_caption: "Ибраимхожо Бакиров за работой",
+                bio_title: "Биография",
+                bio_subtitle: "Творческий путь",
+                bio_p1: "Ибраимхожо Бакиров — выпускник Ленинградского высшего художественно-промышленного училища им. В.И. Мухиной (ныне Академия им. А.Л. Штиглица, Санкт-Петербург, 1981 г.). В настоящее время продолжает свою художественную деятельность в Академии изящных искусств Моленбек в Брюсселе. Его творчество сочетает реалистическую традицию и европейский авангард, объединяя чувство и глубокое осмысление.",
+                bio_p2: "На холсте Бакиров исследует психологию человека и его взаимоотношения с миром через визуальный язык движения, света и цвета. В его портретах раскрывается внутренняя глубина и искренность человеческой природы, где воображение гармонично переплетается с реальностью.",
+                bio_p3: "В графических сепия-работах художник улавливает духовное измерение и мгновение внутреннего созерцания. Критики нередко определяют его стиль как «абстрактный романтизм», полный тайны и поэтической эмоциональности.",
+                bio_p4: "Как скульптор-гуманист, он открывает внутреннюю красоту через металл, медь, дерево и стекло. Знаковая композиция «Мера свободы» передает вечное напряжение между свободой и ограничениями.",
+                time_1957: "Родился в селе Тогуз-Булак, Лейлекский район, Кыргызстан",
+                time_1981: "Окончил Ленинградское училище им. Мухиной (Академия Штиглица)",
+                time_1988: "Член Союза художников и Союза дизайнеров СССР и Кыргызстана",
+                time_1996: "Проректор Национальной академии художеств Кыргызской Республики",
+                time_2001: "Дипломатическая служба в Посольстве Кыргызстана в Брюсселе (по приглашению Чингиза Айтматова)",
+                time_today_title: "Настоящее время",
+                time_today: "Академия изящных искусств Моленбек, Брюссель, Бельгия",
+                workshop_title: "Атмосфера Мастерской",
+                workshop_subtitle: "Пространство созидания",
+                workshop_quote: "Мастерская — место, где тишина превращается в цвет, а мысль обретает материальную форму.",
+                portraits_title: "Портреты",
+                portraits_subtitle: "Взгляд и психология человека",
+                portraits_quote: "Портреты передают единство и глубину человеческой природы, соединяя воображение и реальность.",
+                drawings_title: "Рисунки",
+                drawings_subtitle: "Искусство штриха и линии",
+                drawings_desc: "Эстетика карандашного рисунка — исследование чистой формы и мимолетных эмоций перед их воплощением в живописи или скульптуре.",
+                sculpture_title: "Скульптура",
+                sculpture_subtitle: "Материал, баланс и движение",
+                sculpture_quote: "Скульптор-гуманист, открывающий внутреннюю красоту через металл, медь, дерево и стекло.",
+                video_title: "Видео",
+                video_subtitle: "Художник в процессе творчества",
+                design_title: "Дизайн",
+                design_subtitle: "Прикладное искусство и музеография",
+                design_item_2011: "Дизайн фотовыставки ЮНЕСКО «Женщины Кыргызстана за мир и толерантность», Париж",
+                design_item_2010: "Проект интерьерного дизайна «Универсальное пространство», Брюссель",
+                design_item_1995_soros: "Автор официального логотипа Фонда «Сорос — Кыргызстан»",
+                design_item_1995_manas: "Музейный дизайн к 1000-летию эпоса «Манас» (Комплекс «Манас-Ордо»)",
+                design_edu_title: "Педагогика",
+                design_edu_desc: "Основатель отделения дизайна в Художественном училище им. С.А. Чуйкова (Фрунзе / Бишкек)",
+                exhibitions_title: "Выставки",
+                exhibitions_subtitle: "Избранные международные экспозиции",
+                exh_2025_1: "Персональная выставка",
+                exh_2025_2: "Вернисаж финалистов-скульпторов",
+                exh_2024: "Персональная выставка",
+                exh_2020: "Персональная выставка",
+                exh_2016: "День открытых дверей четырех художников",
+                exh_2015: "«Зеленый марш универсальных цветов»",
+                exh_2013: "Выставка к 85-летию Чингиза Айтматова",
+                exh_2009: "Персональная выставка",
+                exh_2007: "Живопись и скульптура",
+                exh_1999: "Выставка кыргызских художников",
+                contact_title: "Контакты и сотрудничество",
+                contact_subtitle: "Галереи, коллекционеры и арт-проекты",
+                footer_text: "© 2026 Ибраимхожо Бакиров. Произведения находятся в музеях и частных коллекциях по всему миру."
+            },
+            en: {
+                nav_bio: "Biography",
+                nav_workshop: "Studio",
+                nav_portraits: "Portraits",
+                nav_drawings: "Drawings",
+                nav_sculpture: "Sculptures",
+                nav_video: "Videos",
+                nav_design: "Design",
+                nav_exhibitions: "Exhibitions",
+                nav_contact: "Contact",
+                hero_badge: "Contemporary Art Portfolio",
+                hero_subtitle: "Visual Artist, Sculptor & Photographer",
+                btn_view_art: "View Artworks",
+                btn_biography: "Biography",
+                bio_photo_caption: "Ibraimhojo Bakirov in the creative process",
+                bio_title: "Biography",
+                bio_subtitle: "Artistic Journey",
+                bio_p1: "Ibraimhojo Bakirov, a graduate of the Leningrad Higher School of Industrial Art (now Stieglitz Academy, Saint Petersburg, 1981), currently continues his artistic career at the Molenbeek Academy of Fine Arts in Brussels. His oeuvre bridges realist traditions and European avant-garde, uniting intense emotion and deep reflection.",
+                bio_p2: "On canvas, Bakirov explores human psychology and our connection to the world through movement, light, and colour. His portraits capture the sincerity and unity of human nature, merging imagination with reality.",
+                bio_p3: "In sepia works, he seizes spiritual dimensions and fleeting moments of introspection. Critics describe his style as 'abstract romanticism', filled with mystery and poetic sensibility.",
+                bio_p4: "As a humanist sculptor, he unveils inner beauty through raw materials — bronze, copper, wood, and glass. His renowned piece 'The Measure of Freedom' reflects the eternal tension between freedom and restraint.",
+                time_1957: "Born in Toguz-Bulak village, Leilek district, Kyrgyzstan",
+                time_1981: "Graduated from Leningrad Higher Art School (Stieglitz Academy)",
+                time_1988: "Member of USSR and Kyrgyzstan Artists & Designers Unions",
+                time_1996: "Vice-Rector, National Academy of Arts of the Kyrgyz Republic",
+                time_2001: "Diplomatic service at the Kyrgyz Embassy in Brussels (invited by Chingiz Aitmatov)",
+                time_today_title: "Present",
+                time_today: "Molenbeek Academy of Fine Arts, Brussels, Belgium",
+                workshop_title: "Studio Atmosphere",
+                workshop_subtitle: "Sanctuary of Creation",
+                workshop_quote: "The studio is the sacred space where silence turns into color and thought takes form in matter.",
+                portraits_title: "Portraits",
+                portraits_subtitle: "Gaze & Human Psychology",
+                portraits_quote: "His portraits convey the unity and depth of human nature, harmoniously blending imagination with reality.",
+                drawings_title: "Drawings",
+                drawings_subtitle: "The Art of Line & Sketch",
+                drawings_desc: "The refined aesthetic of pencil sketching — exploring raw form and ephemeral impressions before they come to life on canvas or in sculpture.",
+                sculpture_title: "Sculptures",
+                sculpture_subtitle: "Matter, Balance & Motion",
+                sculpture_quote: "A humanist sculptor unveiling inner resonance through bronze, copper, wood, and glass.",
+                video_title: "Videos",
+                video_subtitle: "The Artist in Action",
+                design_title: "Design",
+                design_subtitle: "Applied Arts & Museography",
+                design_item_2011: "UNESCO Photo Exhibition Design 'Women of Kyrgyzstan for Peace and Tolerance', Paris",
+                design_item_2010: "Interior design project 'Universal Space', Brussels",
+                design_item_1995_soros: "Official Logo Design for Soros Foundation Kyrgyzstan",
+                design_item_1995_manas: "Museum and environmental design for the 1000th Anniversary of the Manas Epic (Manas-Ordo)",
+                design_edu_title: "Education",
+                design_edu_desc: "Founder of the Design Department at S.A. Chuikov Art College (Frunze / Bishkek)",
+                exhibitions_title: "Exhibitions",
+                exhibitions_subtitle: "Selected International Shows",
+                exh_2025_1: "Solo Exhibition",
+                exh_2025_2: "Vernissage of Sculptor Finalists",
+                exh_2024: "Solo Exhibition",
+                exh_2020: "Solo Exhibition",
+                exh_2016: "Open Day of Four Artists",
+                exh_2015: "Green March of Universal Colors",
+                exh_2013: "85th Anniversary of Chingiz Aitmatov",
+                exh_2009: "Solo Exhibition",
+                exh_2007: "Painting and Sculpture",
+                exh_1999: "Kyrgyz Artists Exhibition",
+                contact_title: "Contact & Inquiries",
+                contact_subtitle: "Galleries, Collectors & Collaborative Projects",
+                footer_text: "© 2026 Ibraimhojo Bakirov. Artworks held in museums and private collections worldwide."
+            }
+        };
+
+        // Language Switcher Handler
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            localStorage.setItem('preferred_lang', lang);
+            document.documentElement.lang = lang;
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(btn.getAttribute('data-lang'));
+            });
+        });
+
+        // Initialize preferred language (Default: French, or saved preference)
+        const savedLang = localStorage.getItem('preferred_lang') || 'fr';
+        setLanguage(savedLang);
+
+        // Header Scroll Shadow & Compact View
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Active Chapter Highlight
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 160;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Lightbox Zoom Logic
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+
+        const clickableImages = Array.from(document.querySelectorAll('.clickable-img'));
+        let currentImgIndex = 0;
+
+        function openLightbox(index) {
+            currentImgIndex = index;
+            const img = clickableImages[index];
+            lightboxImg.src = img.src;
+            lightboxCaption.textContent = img.getAttribute('data-caption') || img.alt || '';
+            lightboxModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightboxModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function prevImage() {
+            currentImgIndex = (currentImgIndex - 1 + clickableImages.length) % clickableImages.length;
+            openLightbox(currentImgIndex);
+        }
+
+        function nextImage() {
+            currentImgIndex = (currentImgIndex + 1) % clickableImages.length;
+            openLightbox(currentImgIndex);
+        }
+
+        clickableImages.forEach((img, idx) => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => openLightbox(idx));
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+        lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightboxModal.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+
+        // Custom Cursor Movement
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
-        const hoverables = document.querySelectorAll('a, button, .hoverable, .img-placeholder');
+        const hoverables = document.querySelectorAll('a, button, .clickable-img, .lang-btn, .editorial-card, .ws-card, .video-item');
 
         window.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
@@ -991,31 +1832,32 @@
 
             cursorDot.style.left = `${posX}px`;
             cursorDot.style.top = `${posY}px`;
-            
-            // Subtle lag for outline
+
             cursorOutline.animate({
                 left: `${posX}px`,
                 top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
+            }, { duration: 400, fill: "forwards" });
         });
 
         hoverables.forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursorOutline.style.width = '60px';
-                cursorOutline.style.height = '60px';
-                cursorOutline.style.backgroundColor = 'rgba(196, 162, 101, 0.1)';
+                cursorOutline.style.width = '55px';
+                cursorOutline.style.height = '55px';
+                cursorOutline.style.backgroundColor = 'rgba(200, 162, 101, 0.15)';
+                cursorOutline.style.borderColor = 'var(--c-gold)';
             });
             el.addEventListener('mouseleave', () => {
-                cursorOutline.style.width = '40px';
-                cursorOutline.style.height = '40px';
+                cursorOutline.style.width = '36px';
+                cursorOutline.style.height = '36px';
                 cursorOutline.style.backgroundColor = 'transparent';
+                cursorOutline.style.borderColor = 'rgba(200, 162, 101, 0.6)';
             });
         });
 
-        // Initialize GSAP
+        // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero Animation (Letter by Letter)
+        // Hero Title Reveal
         const title = document.getElementById('hero-title');
         const text = title.innerText;
         title.innerHTML = '';
@@ -1030,80 +1872,54 @@
         heroTl.to('.char', {
             y: 0,
             opacity: 1,
-            duration: 1,
-            stagger: 0.05,
+            duration: 0.9,
+            stagger: 0.04,
             ease: "power4.out",
             delay: 0.2
-        }).to('.hero-subtitle', {
+        }).to('.hero-subtitle, .hero-badge, .hero-actions', {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: 0.8,
+            stagger: 0.15,
             ease: "power2.out"
-        }, "-=0.5");
+        }, "-=0.4");
 
-        // Section Titles Animation
-        gsap.utils.toArray('.section-title, .section-subtitle').forEach(title => {
-            gsap.to(title, {
+        // Section Headers Fade Up
+        gsap.utils.toArray('.section-header').forEach(header => {
+            gsap.from(header, {
                 scrollTrigger: {
-                    trigger: title,
+                    trigger: header,
                     start: "top 85%",
                 },
-                y: 0,
-                opacity: 1,
-                duration: 1,
+                y: 35,
+                opacity: 0,
+                duration: 0.8,
                 ease: "power3.out"
             });
         });
 
-        // Bio Section Animation
-        gsap.utils.toArray('.bio-paragraphs p, .timeline-item').forEach((el, i) => {
-            gsap.to(el, {
+        // Cards Staggered Animation
+        gsap.utils.toArray('.editorial-card, .ws-card').forEach((card, i) => {
+            gsap.from(card, {
                 scrollTrigger: {
-                    trigger: el,
-                    start: "top 85%",
+                    trigger: card,
+                    start: "top 90%",
                 },
-                y: 0,
-                x: 0,
-                opacity: 1,
-                duration: 0.8,
-                ease: "power2.out",
-                delay: i % 3 * 0.1
+                y: 40,
+                opacity: 0,
+                duration: 0.7,
+                delay: (i % 3) * 0.1,
+                ease: "power2.out"
             });
         });
 
-        // Grids Stagger Animation
-        const grids = ['.workshop-grid', '.gallery-grid', '.sculpture-grid', '.video-grid', '.design-grid'];
-        grids.forEach(grid => {
-            const items = document.querySelectorAll(`${grid} > div`);
-            if(items.length > 0) {
-                gsap.to(items, {
-                    scrollTrigger: {
-                        trigger: grid,
-                        start: "top 80%",
-                    },
-                    scale: 1,
-                    opacity: 1,
-                    duration: 0.8,
-                    stagger: 0.1,
-                    ease: "back.out(1.2)"
-                });
-            }
-        });
-
-        // Horizontal Scroll Setup (Only for desktop)
+        // Horizontal Scroll Setup (Desktop Only)
         let mm = gsap.matchMedia();
-        
         mm.add("(min-width: 769px)", () => {
             const horizontalSections = gsap.utils.toArray('.horizontal-section');
-            
             horizontalSections.forEach((sec) => {
                 const wrapper = sec.querySelector('.horizontal-wrapper');
-                const content = sec.querySelector('.horizontal-content');
-                const titleArea = sec.querySelector('.horizontal-title-area');
-                
-                // Calculate scroll distance
                 let scrollWidth = wrapper.scrollWidth - window.innerWidth;
-                
                 gsap.to(wrapper, {
                     x: -scrollWidth,
                     ease: "none",
@@ -1116,29 +1932,6 @@
                 });
             });
         });
-
-        // Navigation Dots Update on Scroll
-        const sections = document.querySelectorAll('section');
-        const navDots = document.querySelectorAll('.nav-dot');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                    current = section.getAttribute('data-index');
-                }
-            });
-
-            navDots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.getAttribute('data-index') === current) {
-                    dot.classList.add('active');
-                }
-            });
-        });
-
     </script>
 </body>
 </html>
